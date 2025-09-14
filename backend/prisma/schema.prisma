@@ -19,5 +19,5 @@ model Inventory {
   name String
   price Float
   quantity Int
-  fornecedor String
+  provider String
 }
