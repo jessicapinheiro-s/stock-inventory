@@ -1,8 +1,9 @@
-const { PrismaClient } = require('@prisma/client');
+import { PrismaClient } from "../../../node_modules/@prisma/client/default";
+
 const prisma = new PrismaClient();
 
 // List all products
-const getProducts = async (req, res) => {
+export const getAllProducts = async (req, res) => {
   try {
     const products = await prisma.product.findMany();
     console.log(`[GET] ${products.length} products retrieved`);
@@ -14,7 +15,7 @@ const getProducts = async (req, res) => {
 };
 
 // Add a new product
-const addProduct = async (req, res) => {
+export const addProduct = async (req, res) => {
   try {
     const { name, quantity, price } = req.body;
     const product = await prisma.product.create({
@@ -29,7 +30,7 @@ const addProduct = async (req, res) => {
 };
 
 // Update a product
-const updateProduct = async (req, res) => {
+export const updateProduct = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, quantity, price } = req.body;
@@ -46,7 +47,7 @@ const updateProduct = async (req, res) => {
 };
 
 // Delete a product
-const deleteProduct = async (req, res) => {
+export const deleteProduct = async (req, res) => {
   try {
     const { id } = req.params;
     await prisma.product.delete({ where: { id: Number(id) } });
@@ -58,4 +59,3 @@ const deleteProduct = async (req, res) => {
   }
 };
 
-module.exports = { getProducts, addProduct, updateProduct, deleteProduct };
