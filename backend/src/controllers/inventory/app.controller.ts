@@ -1,7 +1,5 @@
-import { PrismaClient } from "../../../node_modules/@prisma/client/default"
-import type { ReqType } from "../../models/req";
-
-const prisma = new PrismaClient();
+import { prisma } from "../../models/index";
+import type { ReqType } from "../../types/req";
 
 // List all products
 export const getAllProducts = async (req: ReqType, res: any) => {
@@ -18,9 +16,14 @@ export const getAllProducts = async (req: ReqType, res: any) => {
 // Add a new product
 export const addProduct = async (req: ReqType, res: any) => {
   try {
-    const { name, quantity, price } = req.body;
+    const { name, quantity, price, provider } = req.body;
     const product = await prisma.product.create({
-      data: { name, quantity, price },
+      data: {
+        name: name,
+        quantity: quantity,
+        price: price,
+        provider: provider
+      },
     });
     console.log(`[POST] Product created: ${product.name} (ID: ${product.id})`);
     res.status(201).json(product);
@@ -37,7 +40,11 @@ export const updateProduct = async (req: ReqType, res: any) => {
     const { name, quantity, price } = req.body;
     const product = await prisma.product.update({
       where: { id: Number(id) },
-      data: { name, quantity, price },
+      data: {
+        name: name,
+        quantity: quantity,
+        price: price
+      },
     });
     console.log(`[PUT] Product updated: ID ${id}`);
     res.json(product);
