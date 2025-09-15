@@ -5,8 +5,8 @@ import {
     deleteProduct,
     updateProduct
 } from '../../controllers/inventory/app.controller';
-import { productSchema } from "../../schemas/entryDate";
-import { validate } from "../../middlewares/validate-entry";
+import { productSchema } from "../../schemas/products/entry-data";
+import { validate } from "../../middlewares/products/validate-entry";
 
 
 const routerProducts = express.Router();
