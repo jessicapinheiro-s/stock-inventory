@@ -2,7 +2,7 @@ import { prisma } from "../../models";
 import { ReqType } from "../../types/req";
 
 
-const deleteUser = async (req: ReqType, res: any) => {
+export const deleteUser = async (req: ReqType, res: any) => {
     const {
         id
     } = req.body;
@@ -18,7 +18,7 @@ const deleteUser = async (req: ReqType, res: any) => {
         res.status(500).json({ error: 'Failed to delete the user' });
     }
 }
-const createUser = async (req: ReqType, res: any) => {
+export const createUser = async (req: ReqType, res: any) => {
     const {
         name,
         email,
@@ -38,7 +38,7 @@ const createUser = async (req: ReqType, res: any) => {
         res.status(500).json({ error: 'Failed to create user' });
     }
 }
-const updateUser = async (req: ReqType, res: any) => {
+export const updateUser = async (req: ReqType, res: any) => {
     const {
         name,
         email,
@@ -63,8 +63,7 @@ const updateUser = async (req: ReqType, res: any) => {
         res.status(500).json({ error: 'Failed to create user' });
     }
 }
-
-const getUserByEmail = async (req: ReqType, res: any) => {
+export const getUserByEmail = async (req: ReqType, res: any) => {
     const {
         email
     } = req.params;
@@ -81,8 +80,7 @@ const getUserByEmail = async (req: ReqType, res: any) => {
         res.status(404).json({ error: 'User not found' });
     }
 }
-
-const getUserById = async (req: ReqType, res: any) => {
+export const getUserById = async (req: ReqType, res: any) => {
     const {
         id
     } = req.params;
@@ -99,8 +97,7 @@ const getUserById = async (req: ReqType, res: any) => {
         res.status(404).json({ error: 'User not found' });
     }
 }
-
-const allUsers = async (require: ReqType, res: any) => {
+export const allUsers = async (require: ReqType, res: any) => {
     try {
         const getAllUsers = await prisma.users.findMany();
         res.status(201).json(getAllUsers);
